@@ -2,17 +2,23 @@ import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom'
 
+import { Provider } from 'react-redux'
+
 import GlobalStyles from './Styles/Global'
 import Header from './Components/Header/Header'
 import Routes from './routes'
 
+import store from './store/index'
+
 export default function src() {
   return (
-    <BrowserRouter>
-      <Header/>
-      <Routes/>
-      <GlobalStyles/>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Header/>
+        <Routes/>
+        <GlobalStyles/>
     </BrowserRouter>
+    </Provider>
   );
 }
 
