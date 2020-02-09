@@ -2,9 +2,11 @@ import React from 'react';
 
 import { Container, ProductTable, Total } from './styled';
 
+import { connect } from 'react-redux'
+
 import { MdRemoveCircleOutline,  MdAddCircleOutline, MdDelete } from 'react-icons/md'
 
-export default function Cart() {
+ function Cart({ cart }) {
   return (
     <Container>
       <ProductTable>
@@ -18,16 +20,17 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          { cart.map( product => (
+            <tr>
             <td>
-            <img 
-              src='https://static.netshoes.com.br/produtos/tenis-nike-revolution-5-masculino/26/HZM-1731-026/HZM-1731-026_zoom1.jpg' 
-              alt='Têniss'
-            />
+              <img 
+                src={product.image} 
+                alt={product.title}
+              />
             </td>
             <td>
-              <strong>Tênis muito massa</strong>
-              <span>R$ 129,90</span>
+              <strong>{product.title}</strong>
+              <span>{product.priceFormatted}</span>
             </td>
             <td>
               <div>
@@ -49,6 +52,7 @@ export default function Cart() {
               </button>
             </td>
           </tr>
+          )) }
         </tbody>
       </ProductTable>
       <footer>
@@ -61,4 +65,11 @@ export default function Cart() {
       </footer>
     </Container>
   );
+
 }
+
+const mapStateToProps = state => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Cart)
