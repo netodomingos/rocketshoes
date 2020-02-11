@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { MdRemoveCircleOutline,  MdAddCircleOutline, MdDelete } from 'react-icons/md'
 
- function Cart({ cart }) {
+ function Cart({ cart, dispatch }) {
   return (
     <Container>
       <ProductTable>
@@ -37,7 +37,7 @@ import { MdRemoveCircleOutline,  MdAddCircleOutline, MdDelete } from 'react-icon
                 <button type='button'>
                   <MdRemoveCircleOutline size={20} color='#7159c1'/>
                 </button>
-                <input type='number' readOnly value={3} />
+                <input type='number' readOnly value={product.amount} />
                 <button type='button'>
                   <MdAddCircleOutline size={20} color='#7159c1'/>
                 </button>
@@ -47,7 +47,7 @@ import { MdRemoveCircleOutline,  MdAddCircleOutline, MdDelete } from 'react-icon
               <strong>R$ 259,80</strong>
             </td>
             <td>
-              <button type='button'>
+              <button type='button' onClick={() => dispatch({ type:'REMOVE_FROM_CART', id: product.id})}>
                 <MdDelete size={20} color='#7159c1'/>
               </button>
             </td>
